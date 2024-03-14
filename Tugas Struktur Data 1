@@ -37,3 +37,43 @@ class OrderLinkedList:
         while current:          # Loop melalui semua node
             print(f"{current.menu} - ${current.harga} x {current.kuantitas}")
             current = current.next
+
+# Fungsi utama untuk menjalankan program
+def main():
+    list_pesanan = OrderLinkedList()  # Buat linked list untuk pesanan
+
+    # Menu makanan
+    nama_menu = {
+        "Miexue Ice Cream": 5000,
+        "Boba Shake": 16000,
+        "Mi Sundae": 14000,
+        "Mi Ganas": 11000,
+        "Creamy Mango Boba": 22000,
+    }
+
+    # Tampilkan menu makanan
+    print("\n=== Menu Makanan Miexue===\n")
+    for item, harga in nama_menu.items():
+        print(f"{item} - Rp.{harga}")
+
+    # Meminta pengguna untuk memesan
+    while True:
+        pilihan = input("Pilih menu (masukkan sesuai nama menu) atau selesai (x): ")
+        if pilihan.lower() == 'x':  # Keluar dari loop jika 'q' dipilih
+            break
+        elif pilihan in nama_menu:       # Jika pilihan menu valid
+            kuantitas = int(input(f"Masukkan jumlah {pilihan} yang dipesan: "))
+            list_pesanan.add_item(pilihan, nama_menu[pilihan], kuantitas)
+        else:
+            print("Menu tidak valid. Silakan pilih kembali.")
+
+    # Tampilkan pesanan
+    print("\n=== Pesanan Anda ===")
+    list_pesanan.display_order()
+
+    # Hitung dan tampilkan total harga
+    total = list_pesanan.calculate_total()
+    print(f"\nTotal Harga Pesanan: ${total}")
+
+if __name__ == "__main__":
+    main()
