@@ -1,0 +1,39 @@
+# Definisikan Node untuk setiap item pesanan
+class MenuItem:
+    def __init__(self, menu, harga, kuantitas):
+        self.menu = menu        # Nama menu
+        self.harga = harga      # Harga per item
+        self.kuantitas = kuantitas  # Jumlah pesanan
+        self.next = None        # Pointer ke node berikutnya
+
+# Definisikan Linked List untuk menyimpan pesanan
+class OrderLinkedList:
+    def __init__(self):
+        self.head = None        # Inisialisasi linked list kosong
+
+    # Method untuk menambahkan item pesanan ke linked list
+    def add_item(self, menu, harga, kuantitas):
+        new_item = MenuItem(menu, harga, kuantitas)  # Buat node baru
+        if not self.head:       # Jika linked list kosong
+            self.head = new_item
+        else:
+            current = self.head
+            while current.next:  # Cari node terakhir
+                current = current.next
+            current.next = new_item  # Tambahkan node baru ke akhir
+
+    # Method untuk menghitung total harga pesanan
+    def calculate_total(self):
+        total = 0
+        current = self.head
+        while current:          # Loop melalui semua node
+            total += current.harga * current.kuantitas  # Hitung total
+            current = current.next
+        return total
+
+    # Method untuk menampilkan pesanan
+    def display_order(self):
+        current = self.head
+        while current:          # Loop melalui semua node
+            print(f"{current.menu} - ${current.harga} x {current.kuantitas}")
+            current = current.next
